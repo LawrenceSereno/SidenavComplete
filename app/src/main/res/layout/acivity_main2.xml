@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Main Layout (Contains Toolbar, Fragments & Bottom Navigation) -->
+    <!-- Main Layout (Contains Toolbar and Fragment Content) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +16,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white" />
+            android:background="?attr/colorPrimary"
+            android:title="Side Navigation"/>
 
         <!-- FrameLayout for Fragments -->
         <FrameLayout
@@ -24,13 +25,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
-
-        <!-- Bottom Navigation -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/bottom_nav_menu"/>
     </LinearLayout>
 
     <!-- Side Navigation Drawer -->

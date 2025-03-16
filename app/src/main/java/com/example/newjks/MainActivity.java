@@ -1,19 +1,26 @@
 package com.example.newjks;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +32,33 @@ public class MainActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_kaduha);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
+        // Get the header of the NavigationView (this will be the nav_header.xml)
+        View headerView = navigationView.getHeaderView(0);
+
+        // Find the TextView in the header layout
+        TextView appNameTextView = headerView.findViewById(R.id.app_name_text_view);
+
+        // Set the TextView visibility to GONE to hide it
+        appNameTextView.setVisibility(View.GONE);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
+
+        // Setup Toolbar with Drawer Toggle
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        // Handle Bottom Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        // Set the default fragment
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_layout, new HomeFragment())
                     .commit();
         }
 
-        // Handle navigation item selection
+        // Handle Bottom Navigation item selection
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
@@ -59,61 +82,37 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus) {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_FULLSCREEN |
-                            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                            View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    // Side Navigation Item Selection
+    private boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment selectedFragment = null;
+
+        if (item.getItemId() == R.id.nav_home) {
+            selectedFragment = new HomeFragment();
+        } else if (item.getItemId() == R.id.nav_profile) {
+            selectedFragment = new ProfileFragment();
+        } else if (item.getItemId() == R.id.nav_settings) {
+            selectedFragment = new SettingFragment();
         }
+
+        if (selectedFragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_layout, selectedFragment)
+                    .commit();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
-    // Methods to open different apps or websites
-    public void openGoogleMap(View view) {
-        openUrl("https://www.google.com/maps");
-    }
-
-    public void openGames(View view) {
-        openUrl("https://play.google.com/store/apps/category/GAME");
-    }
-
-    public void openEWallet(View view) {
-        openUrl("https://www.paypal.com/");
-    }
-
-    public void openTwitter(View view) {
-        openUrl("https://x.com/?mx=2");
-    }
-
-    public void openYoutube(View view) {
-        openUrl("https://www.youtube.com/");
-    }
-
-    public void openBrowser(View view) {
-        openUrl("https://www.google.com");
-    }
-
-    public void openCalculator(View view) {
-        Intent intent = new Intent(MainActivity.this, Calculator.class);
-        intent.setAction(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_APP_CALCULATOR);
-        startActivity(intent);
-    }
-
-    public void openFlashlight(View view) {
-        Intent intent = new Intent(Intent.ACTION_MAIN);
-        intent.addCategory(Intent.CATEGORY_LAUNCHER);
-        intent.setClassName("com.android.systemui", "com.android.systemui.flashlight.FlashlightActivity");
-        startActivity(intent);
-    }
-
-    private void openUrl(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
+    // Open Drawer when Back is Pressed
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

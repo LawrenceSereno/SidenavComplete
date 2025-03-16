@@ -15,13 +15,6 @@ public class login extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
 
-        Button openNextbtn = findViewById(R.id.loginbtn);
-        openNextbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(login. this,Second.class);
-            startActivity(intent);
-            }
-        });
+        
     }
 }
