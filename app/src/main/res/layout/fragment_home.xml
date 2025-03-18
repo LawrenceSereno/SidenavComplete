@@ -48,7 +48,7 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_marginEnd="6dp"
-                            android:background="@drawable/kiel"
+                            android:background="@drawable/profile1"
                             android:clipToOutline="true"
                             android:contentDescription="Profile Picture"
                             android:scaleType="centerInside" />
@@ -62,7 +62,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="8dp"
-                                android:text="Vince Exequiel S. Tapales"
+                                android:text="Lawrence Sereno"
                                 android:textColor="@color/white"
                                 android:textSize="20sp"
                                 android:textStyle="bold" />
@@ -198,6 +198,7 @@
         android:layout_width="432dp"
         android:layout_height="458dp"
         android:layout_marginEnd="1dp"
+        android:background="@color/black"
         android:gravity="bottom"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -212,7 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:columnCount="2"
-                android:padding="16dp"
+                android:padding="30dp"
                 android:rowCount="4">
 
                 <!-- Google Maps -->

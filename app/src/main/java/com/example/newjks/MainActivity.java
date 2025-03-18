@@ -33,15 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_kaduha);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
-        // Get the header of the NavigationView (this will be the nav_header.xml)
-        View headerView = navigationView.getHeaderView(0);
-
-        // Find the TextView in the header layout
-        TextView appNameTextView = headerView.findViewById(R.id.app_name_text_view);
-
-        // Set the TextView visibility to GONE to hide it
-        appNameTextView.setVisibility(View.GONE);
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this::onNavigationItemSelected);
