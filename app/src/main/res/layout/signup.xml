@@ -22,5 +22,6 @@
         android:id="@+id/btnSignUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/custom_edittext_bg"
         android:text="Sign up" />
 </LinearLayout>

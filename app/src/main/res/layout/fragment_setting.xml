@@ -128,7 +128,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginRight="150dp"
-                        app:srcCompat="@drawable/icons8_language_100" />
+                        app:srcCompat="@drawable/icons8_language_50" />
 
                     <TextView
                         android:layout_width="wrap_content"

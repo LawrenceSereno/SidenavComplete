@@ -20,8 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#C38222"
-            android:gravity="start"
-            android:visibility="invisible"
             tools:background="@drawable/custom_edittext_bg" />
 
         <!-- FrameLayout for Fragments -->
@@ -37,7 +35,6 @@
             android:layout_width="380dp"
             android:layout_height="90dp"
             android:layout_margin="15dp"
-            android:background="@drawable/custom_edittext_bg"
             app:itemIconSize="40dp"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/black"
@@ -50,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@drawable/_67521"
+        android:background="@color/white"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_view" />
 </androidx.drawerlayout.widget.DrawerLayout>
